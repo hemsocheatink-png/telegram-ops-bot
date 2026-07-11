@@ -2,6 +2,8 @@ import os
 import sys
 import asyncio
 import re
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 from datetime import datetime
 from telethon import TelegramClient, events
 from google.oauth2.service_account import Credentials
@@ -316,11 +318,15 @@ async def pipeline_handler(event):
         try: append_to_sheet(event.date, user, msg_text, uploaded_links, pdf_link)
         except Exception as e: print(f"Error: {e}")
 async def main():
+    print("Starting Telegram Client...")
     await client.start(bot_token='8327734059:AAGzhXIdaS05Lm1faveX-GipV2wrTvRFd3M')
     print("----------------------------------------")
-    print("PDF ENGINE OPERATIONAL: Column J handling document compilations!")
+    print("PDF ENGINE OPERATIONAL: Listening for Telegram messages...")
     print("----------------------------------------")
+
+    # This blocks the async function from completing, keeping the cloud server awake
     await client.run_until_disconnected()
 
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(main())
