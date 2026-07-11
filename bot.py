@@ -314,9 +314,9 @@ async def pipeline_handler(event):
     async with sheet_lock:
         try: append_to_sheet(event.date, user, msg_text, uploaded_links, pdf_link)
         except Exception as e: print(f"Error: {e}")
-
 async def main():
-await client.start(bot_token=os.getenv('8327734059:AAGzhXIdaS05Lm1faveX-GipV2wrTvRFd3M'))
+
+await client.start(bot_token='8327734059:AAGzhXIdaS05Lm1faveX-GipV2wrTvRFd3M')
     print("====================================================")
     print("PDF ENGINE OPERATIONAL: Column J handling document compilations!")
     print("====================================================")
