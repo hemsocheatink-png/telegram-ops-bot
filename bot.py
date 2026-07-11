@@ -34,21 +34,13 @@ sheets_creds = Credentials.from_service_account_file('credentials.json', scopes=
 sheets_service = build('sheets', 'v4', credentials=sheets_creds)
 
 DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive.file']
-user_creds = None
-if os.path.exists('token.pickle'):
-    with open('token.pickle', 'rb') as token:
-        user_creds = pickle.load(token)
-# ... rest of your google auth logic ...
-if not user_creds or not user_creds.valid:
-    if user_creds and user_creds.expired and user_creds.refresh_token:
-        user_creds.refresh(Request())
-    else:
-        flow = InstalledAppFlow.from_client_secrets_file('client_secrets.json', DRIVE_SCOPES)
-        user_creds = flow.run_local_server(port=0)
-    with open('token.pickle', 'wb') as token:
-        pickle.dump(user_creds, token)
-
-drive_service = build('drive', 'v3', credentials=user_creds)
+# --- GOOGLE AUTHENTICATION SYSTEM FOR HEADLESS SERVER ---
+    from google.oauth2 import service_account
+    
+    sheets_creds = service_account.Credentials.from_service_account_file(
+        'credentials.json', scopes=DRIVE_SCOPES
+    )
+    drive_service = build('drive', 'v3', credentials=sheets_creds)
 client = TelegramClient('session_master', API_ID, API_HASH)
 
 sheet_lock = asyncio.Lock()
