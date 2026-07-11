@@ -319,7 +319,7 @@ async def main():
     print("----------------------------------------")
     print("PDF ENGINE OPERATIONAL: Column J handling document compilations!")
     print("----------------------------------------")
-    await client.run_until_connected()
+    await client.run_until_disconnected()
 
 if __name__ == '__main__':
     asyncio.run(main())
