@@ -22,7 +22,7 @@ if sys.platform == 'win32':
 # --- CONFIGURATIONS ---
 API_ID = 38057630                 
 API_HASH = '05445482addf82f465d77229b06f696e'       
-TARGET_GROUP = 'https://t.me/+NZ8VueLgQ4ZiMjk1'  
+TARGET_GROUP = '-5188583974'  
 
 SPREADSHEET_ID = '1kk2_7H567VTdOXLUIrxc4xAtPrpqUtlwyiDHlGl4lvI'
 DRIVE_FOLDER_ID = '1xdm2a1ZwtOuignPt-3hzepIqLyL-0Cel' 
