@@ -316,11 +316,12 @@ async def pipeline_handler(event):
         except Exception as e: print(f"Error: {e}")
 async def main():
 
-await client.start(bot_token='8327734059:AAGzhXIdaS05Lm1faveX-GipV2wrTvRFd3M')
-    print("====================================================")
+async def main():
+    await client.start(bot_token='8327734059:AAGzhXIdaS05Lm1faveX-GipV2wrTvRFd3M')
+    print("----------------------------------------")
     print("PDF ENGINE OPERATIONAL: Column J handling document compilations!")
-    print("====================================================")
-    await client.run_until_disconnected()
+    print("----------------------------------------")
+    await client.run_until_connected()
 
 if __name__ == '__main__':
     asyncio.run(main())
