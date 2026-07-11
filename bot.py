@@ -43,7 +43,7 @@ if not user_creds or not user_creds.valid:
     if user_creds and user_creds.expired and user_creds.refresh_token:
         user_creds.refresh(Request())
     else:
-        flow = InstalledAppFlow.from_client_secrets_file(r'E:\telegrambackup\client_secrets.json', DRIVE_SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file('client_secrets.json', DRIVE_SCOPES)
         user_creds = flow.run_local_server(port=0)
     with open('token.pickle', 'wb') as token:
         pickle.dump(user_creds, token)
