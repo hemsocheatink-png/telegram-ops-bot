@@ -232,6 +232,7 @@ async def process_grouped_message(grouped_id):
 # ==========================================
 @client.on(events.NewMessage(chats=TARGET_GROUP))
 async def pipeline_handler(event):
+    print(f"Received message: {event.message.text}")  # <-- Injected line
     if event.message.grouped_id is not None:
         gid = event.message.grouped_id
         if gid not in album_cache:
