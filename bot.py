@@ -29,18 +29,22 @@ TARGET_GROUP =-1005188583974
 SPREADSHEET_ID = '1kk2_7H567VTdOXLUIrxc4xAtPrpqUtlwyiDHlGl4lvI'
 DRIVE_FOLDER_ID = '1xdm2a1ZwtOuignPt-3hzepIqLyL-0Cel' 
 
-# --- GOOGLE INITIALIZATION ---
-# Change from absolute Windows paths (E:\...) to relative paths
-SHEET_SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-sheets_creds = Credentials.from_service_account_file('credentials.json', scopes=SHEET_SCOPES)
-sheets_service = build('sheets', 'v4', credentials=sheets_creds)
-
-DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive.file']
-# --- GOOGLE AUTHENTICATION SYSTEM FOR HEADLESS SERVER ---
+# --- GOOGLE INITIALIZATION FOR HEADLESS SERVER ---
 from google.oauth2 import service_account
-sheets_creds = service_account.Credentials.from_service_account_file(
-'credentials.json', scopes=DRIVE_SCOPES)
-drive_service = build('drive', 'v3', credentials=sheets_creds)
+
+# Unified scopes list allowing both drive file uploads and spreadsheet writes
+COMBINED_SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive.file'
+]
+
+# Create one secure credential instance containing both scopes
+google_creds = service_account.Credentials.from_service_account_file('credentials.json', scopes=COMBINED_SCOPES)
+
+# Build both distinct services using the unified credentials
+sheets_service = build('sheets', 'v4', credentials=google_creds)
+drive_service = build('drive', 'v3', credentials=google_creds)
+
 client = TelegramClient('session_master', API_ID, API_HASH)
 sheet_lock = asyncio.Lock()
 ALBUM_COOLDOWN = 1.5  
