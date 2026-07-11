@@ -35,18 +35,14 @@ sheets_service = build('sheets', 'v4', credentials=sheets_creds)
 
 DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive.file']
 # --- GOOGLE AUTHENTICATION SYSTEM FOR HEADLESS SERVER ---
-    from google.oauth2 import service_account
-    
-    sheets_creds = service_account.Credentials.from_service_account_file(
-        'credentials.json', scopes=DRIVE_SCOPES
-    )
-    drive_service = build('drive', 'v3', credentials=sheets_creds)
+from google.oauth2 import service_account
+sheets_creds = service_account.Credentials.from_service_account_file(
+'credentials.json', scopes=DRIVE_SCOPES)
+drive_service = build('drive', 'v3', credentials=sheets_creds)
 client = TelegramClient('session_master', API_ID, API_HASH)
-
 sheet_lock = asyncio.Lock()
 ALBUM_COOLDOWN = 1.5  
 LOCAL_TZ = pytz.timezone('Asia/Phnom_Penh')
-
 # --- PDF GENERATOR UTILITY ---
 def create_pdf_from_images(image_paths, pdf_filename):
     """Compiles a list of local image files into a single structured PDF document."""
